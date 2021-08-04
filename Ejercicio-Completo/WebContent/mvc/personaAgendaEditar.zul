@@ -1,0 +1,48 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winPersonaAgendaEditar" ?>
+<window id="winPersonaAgendaEditar" 
+        border="normal" 
+        vflex="min" width="500px" 
+        apply="com.demo.control.mvc.PersonaAgendaEditar">
+	<caption height="20px" 
+	         style="font-weight: bold; font-size: medium; color: #636363;" 
+	         label="Agenda - MVC"/>
+	<vlayout>
+		<hlayout>
+			<label value="Persona:"/>
+			<label value="@{winPersonaAgendaEditar$composer.agenda.persona.nombre}"/>
+		</hlayout>
+		<grid >
+			<columns>
+				<column align="right" hflex="min"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Fecha :</cell>
+					<cell><datebox value="@{winPersonaAgendaEditar$composer.agenda.fecha}" 
+					               width="100px"
+					               constraint="no past: No se puede agendar al pasado."/></cell>
+				</row>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Duración :</cell>
+					<cell><intbox value="@{winPersonaAgendaEditar$composer.agenda.duracion}" 
+					               width="50px"
+					               constraint="no empty: Debe ingresar la duracion"/></cell>
+				</row>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Detalles :</cell>
+					<cell><textbox value="@{winPersonaAgendaEditar$composer.agenda.detalles}" 
+					               hflex="1"
+					               constraint="no empty: Debe ingresar los detalles."
+					               maxlength="255"/></cell>
+				</row>
+			</rows>
+		</grid>
+		
+		<!-- Los iconos listados con iconSclass son de: http://fontawesome.io/icons/ -->
+		<hlayout>
+			<button id="grabar" label="Grabar" iconSclass="z-icon-save" />
+			<button id="salir" label="Salir" iconSclass="z-icon-sign-out" />
+		</hlayout>
+	</vlayout>
+</window>

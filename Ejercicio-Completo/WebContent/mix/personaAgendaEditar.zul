@@ -1,0 +1,49 @@
+<window id="winPersonaAgendaEditar" 
+        border="normal" 
+        vflex="min" 
+        width="500px" 
+        apply="org.zkoss.bind.BindComposer" 
+        viewModel="@id('vm') @init('com.demo.control.mix.PersonaAgendaEditar')">
+	<caption height="20px" 
+	         style="font-weight: bold; font-size: medium; color: #636363;" 
+	         label="Agenda - MIX"/>
+	<vlayout>
+		<hlayout>
+			<label value="Persona:"/>
+			<label value="@load(vm.agenda.persona.nombre)"/>
+		</hlayout>
+		<grid >
+			<columns>
+				<column align="right" hflex="min"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Fecha :</cell>
+					<cell><datebox value="@bind(vm.agenda.fecha)" 
+					               width="100px"
+					               constraint="no past: No se puede agendar al pasado."/></cell>
+				</row>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Duración :</cell>
+					<cell><intbox value="@bind(vm.agenda.duracion)" 
+					               width="50px"
+					               constraint="no empty: Debe ingresar la duracion"/></cell>
+				</row>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Detalles :</cell>
+					<cell><textbox value="@bind(vm.agenda.detalles)" 
+					               hflex="1"
+					               constraint="no empty: Debe ingresar los detalles."
+					               maxlength="255"/></cell>
+				</row>
+			</rows>
+		</grid>
+		
+		<!-- Los iconos listados con iconSclass son de: http://fontawesome.io/icons/ -->
+		<hlayout>
+			<button id="grabar" label="Grabar" iconSclass="z-icon-save"     onClick="@command('grabar')" />
+			<button id="salir"  label="Salir"  iconSclass="z-icon-sign-out" onClick="@command('salir')" />
+		</hlayout>
+	</vlayout>
+</window>

@@ -1,0 +1,64 @@
+<?page title="Lista de Personas" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winListaPersonas" ?>
+<zk>
+	<window id="winListaPersonas"
+		apply="com.demo.control.mvc.PersonaLista" hflex="1" vflex="1"
+		title="Personas - MVC" border="normal">
+		<vlayout vflex="1">
+			<toolbar>
+				<toolbarbutton id="btnNuevo" label="Nuevo"
+					iconSclass="z-icon-plus" />
+				<toolbarbutton id="btnEditar" label="Editar"
+					iconSclass="z-icon-pencil" />
+				<toolbarbutton id="btnEliminar" label="Eliminar"
+					iconSclass="z-icon-trash-o" />
+				<toolbarbutton id="btnBorrar" label="Borrar"
+					iconSclass="z-icon-minus" />
+					<separator orient="vertical" width="50px" />
+				<toolbarbutton id="btnAgendaNuevo"   label="Nueva Agenda"   iconSclass="z-icon-calendar-o"  />
+				<toolbarbutton id="btnAgendaEditar"  label="Editar Agenda"   iconSclass="z-icon-calendar"  />
+				<toolbarbutton id="btnAgendaBorrar"  label="Borrar Agenda"   iconSclass="z-icon-minus"  />
+			</toolbar>
+			<hlayout>
+				<textbox id="txtBuscar" hflex="1" />
+				<button id="btnBuscar" label="Buscar!"
+					iconSclass="z-icon-search" />
+			</hlayout>
+			<hlayout vflex="1" hflex="1">
+				<listbox id="lstPersonas"
+					model="@{winListaPersonas$composer.personas}" 
+					selectedItem="@{winListaPersonas$composer.personaSeleccionada}"
+					hflex="1"
+					vflex="1">
+					<listhead>
+						<listheader label="Nombre" />
+						<listheader label="e-mail" width="150px" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.nombre}" />
+							<listcell label="${each.email}" />
+						</listitem>
+					</template>
+				</listbox>
+				<listbox id="lstAgendas"
+					model="@{winListaPersonas$composer.personaSeleccionada.agendas}"
+					selectedItem="@{winListaPersonas$composer.agendaSeleccionada}"
+					vflex="1" hflex="1">
+					<listhead>
+						<listheader label="Fecha" width="80px" />
+						<listheader label="Duración" width="80px" />
+						<listheader label="Detalles" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.fecha}" />
+							<listcell label="${each.duracion}" />
+							<listcell label="${each.detalles}" />
+						</listitem>
+					</template>
+				</listbox>
+			</hlayout>
+		</vlayout>
+	</window>
+</zk>

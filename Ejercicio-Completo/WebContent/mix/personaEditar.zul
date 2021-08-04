@@ -1,0 +1,84 @@
+<window id="winPersonaEditar" 
+        border="normal" 
+        vflex="min" 
+        width="580px" 
+        apply="org.zkoss.bind.BindComposer" 
+        viewModel="@id('vm') @init('com.demo.control.mix.PersonaEditar')">
+	<caption src="/img/user.png" 
+	         height="20px" 
+	         style="font-weight: bold; font-size: medium; color: #636363;" 
+	         label="Persona - MIX"/>
+	<vlayout>
+		<hlayout>
+			<grid width="350px" vflex="1">
+				<columns>
+					<column align="right" hflex="min" width="100px"/>
+					<column width="200px"/>
+				</columns>
+				<rows>
+					<row>
+						<cell style="font-weight: bold; color:#636363;">Numero :</cell>
+						<cell><label id="numero" value="@load(vm.persona.id)"/></cell>
+					</row>
+					<row>
+						<cell style="font-weight: bold; color:#636363;">Nombre :</cell>
+						<cell><textbox id="nombre" 
+						               value="@bind(vm.persona.nombre)" 
+						               width="205px"
+						               constraint="no empty: Debe ingresar el nombre"
+						               maxlength="255"/>
+						</cell>
+					</row>
+					<row>
+						<cell style="font-weight: bold; color:#636363;">Email :</cell>
+						<cell><textbox id="email" 
+						               value="@bind(vm.persona.email)" 
+						               width="200px"
+						               constraint="/.+@.+\.[a-z]+/: No es una dirección email."
+						               maxlength="50"/>
+						</cell>
+					</row>
+					<row>
+						<cell style="font-weight: bold; color:#636363;">Fecha Nacimiento :</cell>
+						<cell><datebox id="fecNacimiento" 
+						               value="@bind(vm.persona.fechaNacimiento)" 
+						               width="200px"/>
+						</cell>
+					</row>
+					<row>
+						<cell style="font-weight: bold; color:#636363;">Pais :</cell>
+						<cell>
+							<combobox model="@load(vm.paises)" 
+							          selectedItem="@bind(vm.persona.pai)" 
+							          value="@load(vm.persona.pai.nombre)" 
+							          width="200px" >
+							     <template name="model">
+							     	<comboitem label="@load(each.nombre)" 
+							     	           image="@load(each.bandera)" 
+							     	           value="@load(each)"/>
+							     </template>
+							</combobox>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</hlayout>
+		<hlayout>
+		<vlayout hflex="1" vflex="1">
+			<label style="font-weight: bold; color:#636363;">Biografia :</label>
+			<textbox id="biografia" 
+			               value="@bind(vm.persona.biografia)" 
+			               multiline="true" 
+			               hflex="1" 
+			               height="200px" />
+		</vlayout>
+		
+		</hlayout>
+		
+		<!-- Los iconos listados con iconSclass son de: http://fontawesome.io/icons/ -->
+		<hlayout>
+			<button id="grabar" label="Grabar" iconSclass="z-icon-save"     onClick="@command('grabar')" />
+			<button id="salir"  label="Salir"  iconSclass="z-icon-sign-out" onClick="@command('salir')" />
+		</hlayout>
+	</vlayout>
+</window>

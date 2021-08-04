@@ -1,0 +1,57 @@
+<?page title="Lista de Personas" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window apply="org.zkoss.bind.BindComposer" 
+            viewModel="@id('vm') @init('com.demo.control.mvvm.PersonaLista')"
+	        hflex="1" vflex="1" 
+	        title="Personas - MVVM" border="normal">
+		<vlayout vflex="1">
+			<toolbar>
+				<toolbarbutton label="Nuevo"    iconSclass="z-icon-plus"     onClick="@command('nuevo')"/>
+				<toolbarbutton label="Editar"   iconSclass="z-icon-pencil"   onClick="@command('editar')"/>
+				<toolbarbutton label="Eliminar" iconSclass="z-icon-trash-o"  onClick="@command('eliminar')"/>
+				<toolbarbutton label="Borrar"   iconSclass="z-icon-minus"    onClick="@command('borrar')"/>
+				<separator orient="vertical" width="50px" />
+				<toolbarbutton label="Nueva Agenda"   iconSclass="z-icon-calendar-o"  onClick="@command('agendaNuevo')"/>
+				<toolbarbutton label="Editar Agenda"   iconSclass="z-icon-calendar"   onClick="@command('agendaEditar')"/>
+				<toolbarbutton label="Borrar Agenda"   iconSclass="z-icon-minus"      onClick="@command('agendaBorrar')"/>
+			</toolbar>
+			<hlayout>
+				<textbox value="@bind(vm.textoBuscar)" hflex="1" />
+				<button label="Buscar!" iconSclass="z-icon-search" onClick="@command('buscar')" />
+			</hlayout>
+			<hlayout vflex="1" hflex="1">
+				<listbox model="@load(vm.personas)" 
+						 selectedItem="@bind(vm.personaSeleccionada)" 
+						 onSelect="@command('limpiaAgenda')"
+						 hflex="1" vflex="1">
+					<listhead>
+						<listheader label="Nombre" />
+						<listheader label="e-mail" width="150px"/>
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.nombre)" />
+							<listcell label="@load(each.email)" />
+						</listitem>
+					</template>
+				</listbox>
+				<listbox model="@load(vm.personaSeleccionada.agendas)"
+				      selectedItem="@bind(vm.agendaSeleccionada)" 
+				      vflex="1" hflex="1">
+					<listhead>
+						<listheader label="Fecha" width="80px"/>
+						<listheader label="Duración" width="80px"/>
+						<listheader label="Detalles" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.fecha)"/>
+							<listcell label="@load(each.duracion)"/>
+							<listcell label="@load(each.detalles)"/>
+						</listitem>
+					</template>
+				</listbox>
+			</hlayout>
+		</vlayout>
+	</window>
+</zk>

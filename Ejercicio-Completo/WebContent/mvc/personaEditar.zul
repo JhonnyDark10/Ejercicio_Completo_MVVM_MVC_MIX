@@ -1,0 +1,70 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winPersonaEditar" ?>
+<window id="winPersonaEditar" border="normal" vflex="min" width="500px" apply="com.demo.control.mvc.PersonaEditar">
+	<caption src="/img/user.png" 
+	         height="20px" 
+	         style="font-weight: bold; font-size: medium; color: #636363;" 
+	         label="Persona - MVC"/>
+	<vlayout>
+		<grid >
+			<columns>
+				<column align="right" hflex="min"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Numero :</cell>
+					<cell><label id="numero" value="@{winPersonaEditar$composer.persona.id}"/></cell>
+				</row>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Nombre :</cell>
+					<cell><textbox id="nombre" 
+					               value="@{winPersonaEditar$composer.persona.nombre}" 
+					               width="200px"
+					               maxlength="255"/></cell>
+				</row>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Email :</cell>
+					<cell><textbox id="email" 
+					               value="@{winPersonaEditar$composer.persona.email}" 
+					               width="200px"
+					               maxlength="50"/></cell>
+				</row>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Fecha Nacimiento :</cell>
+					<cell><datebox id="fecNacimiento" 
+					               value="@{winPersonaEditar$composer.persona.fechaNacimiento}" 
+					               width="200px"
+					               /></cell>
+				</row>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Pais :</cell>
+					<cell>
+						<combobox model="@{winPersonaEditar$composer.paises}" 
+						         selectedItem="@{winPersonaEditar$composer.persona.pai}" 
+						         value="@{winPersonaEditar$composer.persona.pai.nombre}" 
+						         width="200px" >
+						     <template name="model">
+						     	<comboitem label="${each.nombre}" 
+						     	           image="${each.bandera}" />
+						     </template>
+						</combobox>
+					</cell>
+				</row>
+				<row>
+					<cell style="font-weight: bold; color:#636363;">Biografia :</cell>
+					<cell><textbox id="biografia" 
+					               value="@{winPersonaEditar$composer.persona.biografia}" 
+					               multiline="true" 
+					               hflex="1" 
+					               height="200px" /></cell>
+				</row>
+			</rows>
+		</grid>
+		
+		<!-- Los iconos listados con iconSclass son de: http://fontawesome.io/icons/ -->
+		<hlayout>
+			<button id="grabar" label="Grabar" iconSclass="z-icon-save" />
+			<button id="salir" label="Salir" iconSclass="z-icon-sign-out" />
+		</hlayout>
+	</vlayout>
+</window>
