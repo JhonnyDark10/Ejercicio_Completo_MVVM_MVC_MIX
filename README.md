@@ -9,7 +9,7 @@ Modelo Vista Controlador
 
 Para su desarrollo se uso:
 
-- Eclipse: java
+- Eclipse: Java
 - Framework: ZK
 
 🌱 I’m currently learning new technologies.
